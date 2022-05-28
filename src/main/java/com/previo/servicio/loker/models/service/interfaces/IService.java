@@ -15,4 +15,6 @@ public interface IService<T>{
 	public void delete(T entity);
 	
 	
+	
+	
 }

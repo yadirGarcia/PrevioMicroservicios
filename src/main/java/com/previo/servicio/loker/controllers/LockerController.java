@@ -1,6 +1,6 @@
 package com.previo.servicio.loker.controllers;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,38 +23,30 @@ public class LockerController {
 	private ILockerService lockerService;
 	
 
-    @GetMapping("/listar")
+    @GetMapping()
 	public List<Locker> findAll() {
 		return (List<Locker>) lockerService.findAll();
 	}
 
-    @GetMapping("/ver/{id}")
+    @GetMapping("/{id}")
 	public Locker findById(@PathVariable Long id) {
 		return lockerService.findById(id);
 	}
+    
+    
 
-    @PostMapping("/guardar")
+    @PostMapping()
 	public void Save(@RequestBody Locker objeto) {
 		lockerService.Save(objeto);
 	}
 
-	
-    @PostMapping("/guardarLista")
-	public void saveAll(@RequestBody ArrayList<Locker> objetos) {
-		lockerService.saveAll(objetos);
-		
-	}
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
 	public void deleteById(@PathVariable Long id) {
 		lockerService.deleteById(id);
 		
 	}
 
-    @DeleteMapping("/eliminarObjeto")
-	public void delete(@RequestBody Locker entity) {
-		lockerService.delete(entity);
-		
-	}
+   
 
 }

@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -27,37 +29,36 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "SOLICITUD")
+@Table(name = "solicitud")
 public class Solicitud implements Serializable{
 	
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8745878352350855210L;
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private Long id;
+	@Column(name = "id")
+	private Long idSolicitud;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY,optional = false)
-	@JoinColumn(name = "CODIGO_QR_ID")//llave foranea
-	@JsonProperty(access = Access.WRITE_ONLY)
+	@JoinColumn(name = "idCodigoQr")//llave foranea
 	private CodigoQr codigoQr;
 	
-	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY,optional = false)
-	@JoinColumn(name = "LOCKER_ID")//llave foranea
-	@JsonProperty(access = Access.WRITE_ONLY)
+	@JoinColumn(name = "idLocker")//llave foranea
 	private Locker locker;
 
-	@Column(name = "FECHA_PRESTAMO")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "fechaPrestamo")
 	private Date fechaPrestamo;
 	
-	@Column(name = "FECHA_DEVOLUCION")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "fechaDevolucion")
 	private Date fechaDevolucion;
 	
 	

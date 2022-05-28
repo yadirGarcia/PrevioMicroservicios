@@ -38,7 +38,6 @@ public class LockerServiceImpl implements ILockerService{
 	@Override
 	public void saveAll(ArrayList<Locker> objetos) {
 		lockerDao.saveAll(objetos);
-		
 	}
 
 	@Override

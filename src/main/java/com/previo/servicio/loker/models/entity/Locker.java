@@ -23,20 +23,24 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "LOCKER")
+@Table(name = "locker")
 public class Locker implements Serializable{
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4008629220959014736L;
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private Long id;
+	@Column(name = "id")
+	private Long idLocker;
 	
-	@Column(name = "ESTADO")
+	@Column(name = "estado")
 	private String estado;
 	
 	@OneToMany(mappedBy = "locker",cascade = CascadeType.ALL)

@@ -23,18 +23,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "CODIGO_QR")
+@Table(name = "codigoQr")
 public class CodigoQr implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8300142748106193272L;
 	
+	private static final long serialVersionUID = 1L;
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private Long id;
+	@Column(name = "id")
+	private Long idCodigoQr;
 	
 	@OneToMany(mappedBy = "codigoQr",cascade = CascadeType.ALL)
 	private List<Solicitud> ListaSolicitudes = new ArrayList<Solicitud>();
