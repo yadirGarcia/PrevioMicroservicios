@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,9 +41,15 @@ public class SolicitudController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Boolean> save(@Valid  @RequestBody Solicitud solicitud){
-		service.Save(solicitud);
-		return ResponseEntity.status(HttpStatus.OK).body(true);
+	public ResponseEntity<Solicitud> save(@Valid  @RequestBody Solicitud solicitud){
+		System.out.println(solicitud);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(service.save(solicitud));
+	}
+	
+	@PutMapping
+	public void liberarSolicitud(@Valid  @RequestBody Solicitud solicitud){
+		service.liberarLocker(solicitud);
 	}
 
 }

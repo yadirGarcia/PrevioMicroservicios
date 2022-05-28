@@ -40,10 +40,15 @@ public class Locker implements Serializable{
 	@Column(name = "id")
 	private Long idLocker;
 	
-	@Column(name = "estado")
-	private String estado;
+	@Column(name = "nombre")
+	private String nombre;
 	
-	@OneToMany(mappedBy = "locker",cascade = CascadeType.ALL)
+	@Column(name = "estado")
+	private int estado;
+	
+	
+	
+	@OneToMany(mappedBy = "idLocker",cascade = CascadeType.ALL)
 	private List<Solicitud> listaSolicitudes = new ArrayList<Solicitud>();
 
 }

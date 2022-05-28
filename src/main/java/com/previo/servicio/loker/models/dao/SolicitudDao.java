@@ -1,9 +1,6 @@
 package com.previo.servicio.loker.models.dao;
 
 
-
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +12,8 @@ import com.previo.servicio.loker.models.entity.Solicitud;
 
 @Repository
 public interface SolicitudDao extends CrudRepository<Solicitud, Long>{
+
 	
-	@Query(nativeQuery = false,value = "SELECT s FROM Solicitud s WHERE s.fechaPrestamo BETWEEN :fechaInicio AND :fechaFin")
-	 List<Solicitud> findByFechaPrestamo(@Param("fechaInicio") Timestamp fechaInicio,@Param("fechaFin") Timestamp fechaFin);
+	@Query(nativeQuery = false, value = "SELECT s FROM Solicitud s WHERE s.fechaPrestamo BETWEEN :fechaInicio AND :fechaFin ORDER BY s.fechaPrestamo")
+	public List<Solicitud> findByFechaPrestamo(@Param("fechaInicio") String fechaInicio, @Param("fechaFin") String end);
 }

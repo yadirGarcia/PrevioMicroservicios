@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.previo.servicio.loker.models.dao.LockerDao;
 import com.previo.servicio.loker.models.entity.Locker;
 import com.previo.servicio.loker.models.service.interfaces.ILockerService;
+import com.previo.servicio.loker.util.LockerException;
 
 @Service
 public class LockerServiceImpl implements ILockerService{
@@ -27,12 +28,13 @@ public class LockerServiceImpl implements ILockerService{
 	@Override
 	@Transactional(readOnly = true)
 	public Locker findById(Long id) {
-		return lockerDao.findById(id).get();
+		//no registratrar elemenos sin que los otros existan
+		return lockerDao.findById(id).orElseThrow(()->new LockerException("No existe ningun locker con este id"));
 	}
 
 	@Override
-	public void Save(Locker objeto) {
-		lockerDao.save(objeto);
+	public Locker save(Locker objeto) {
+		return lockerDao.save(objeto);
 	}
 
 	@Override
@@ -50,6 +52,11 @@ public class LockerServiceImpl implements ILockerService{
 	public void delete(Locker entity) {
 		lockerDao.delete(entity);
 		
+	}
+
+	@Override
+	public List<Locker> findByEstadoLocker(int estado) {
+		return lockerDao.findByEstadoLocker(estado);
 	}
 	
 	

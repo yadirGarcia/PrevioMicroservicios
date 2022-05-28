@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.transaction.Transactional;
+
+import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -23,8 +26,9 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-
+@ToString
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,24 +47,31 @@ public class Solicitud implements Serializable{
 	@Column(name = "id")
 	private Long idSolicitud;
 
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY,optional = false)
-	@JoinColumn(name = "idCodigoQr")//llave foranea
+	
+
+	@Column(name = "idCodigoQr")//llave foranea
+	private Long idCodigoQr;
+	
+	
+
+	@Column(name = "idLocker")//llave foranea
+	private Long idLocker;
+
+
+	@Column(name = "fechaPrestamo")
+	private String fechaPrestamo;
+	
+	
+	@Column(name = "fechaDevolucion")
+	private String fechaDevolucion;
+	
+	
+	
+	@Transient
 	private CodigoQr codigoQr;
 	
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY,optional = false)
-	@JoinColumn(name = "idLocker")//llave foranea
+	@Transient
 	private Locker locker;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "fechaPrestamo")
-	private Date fechaPrestamo;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "fechaDevolucion")
-	private Date fechaDevolucion;
-	
 	
 	
 }

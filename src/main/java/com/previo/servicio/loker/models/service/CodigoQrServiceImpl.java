@@ -3,16 +3,19 @@ package com.previo.servicio.loker.models.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.previo.servicio.loker.models.dao.CodigoQrDao;
 import com.previo.servicio.loker.models.entity.CodigoQr;
 import com.previo.servicio.loker.models.service.interfaces.ICodigoQrService;
+import com.previo.servicio.loker.util.LockerException;
 
 @Service
 public class CodigoQrServiceImpl implements ICodigoQrService {
 	
+	@Autowired
 	private CodigoQrDao codigoQrDao;
 
 	@Override
@@ -24,12 +27,12 @@ public class CodigoQrServiceImpl implements ICodigoQrService {
 	@Override
 	@Transactional(readOnly = true)
 	public CodigoQr findById(Long id) {
-		return codigoQrDao.findById(id).get();
+		return codigoQrDao.findById(id).orElseThrow(()->new LockerException("No existe ningun codigoQr con este id"));
 	}
 
 	@Override
-	public void Save(CodigoQr objeto) {
-		codigoQrDao.save(objeto);
+	public CodigoQr save(CodigoQr objeto) {
+		return codigoQrDao.save(objeto);
 
 	}
 

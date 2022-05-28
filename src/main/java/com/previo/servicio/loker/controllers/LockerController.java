@@ -36,9 +36,11 @@ public class LockerController {
     
 
     @PostMapping()
-	public void Save(@RequestBody Locker objeto) {
-		lockerService.Save(objeto);
+	public Locker save(@RequestBody Locker objeto) {
+		return lockerService.save(objeto);
 	}
+    
+    
 
 
     @DeleteMapping("/{id}")

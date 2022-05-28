@@ -34,7 +34,14 @@ public class CodigoQr implements Serializable{
 	@Column(name = "id")
 	private Long idCodigoQr;
 	
-	@OneToMany(mappedBy = "codigoQr",cascade = CascadeType.ALL)
+	
+	@Column(name = "solicitud")
+	private boolean solicitud;
+	
+	@Column(name = "value")
+	private String value;//base64
+	
+	@OneToMany(mappedBy = "idCodigoQr",cascade = CascadeType.ALL)
 	private List<Solicitud> ListaSolicitudes = new ArrayList<Solicitud>();
 
 }
